@@ -1,16 +1,16 @@
 <template>
-<div class="container-fluid p-5">
-  <div class="row">
+<div class="container-fluid p-5"> <!-- start of the page container -->
+  <div class="row"> <!-- start of title row -->
     <div class="col">
       <h1 class="display-1 text-white">Carousel widget</h1>
     </div>
-  </div>
-  <div class="row widget-row">
+  </div> <!-- end of title row -->
+  <div class="row widget-row"> <!-- start of widget row -->
     <div class="col">
       <boot-carousel />
     </div>
-  </div>
-</div>
+  </div> <!-- end of widget row -->
+</div> <!-- end of page container -->
 </template>
 
 <script>
@@ -33,6 +33,8 @@ export default {
   color: #2c3e50;
 }
 
+
+//adding background gradient
 .container-fluid {
   margin-left:0;
   margin-right:0;
@@ -40,6 +42,7 @@ export default {
   background-image: linear-gradient( 135deg, #FFD26F 10%, #3677FF 100%);
 }
 
+// adding the glass effect to the row of the widget. this can be altered to fit any style of the rest of the webpage
 .widget-row{
   background:rgba(255,255,255,0.15);
 
