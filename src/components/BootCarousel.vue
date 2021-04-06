@@ -16,9 +16,8 @@
         <select @change="image_amount = ChangeNumberPerSlide()" name="total_amount" id="number_per_slide" v-model="number_per_slide" > 
             <option value="4">4</option>                    
             <option value="6">6</option> 
-            <option value=8>8</option> 
-            <option value="12">12</option>
-            <option :value="data.length">alla</option> 
+            <option class="d-none d-sm-block" value=8>8</option> 
+            <option class="d-none d-md-block" value="12">12</option>
         </select>
     </div><!-- End of Images per slide selection section -->
   </div><!-- End of selection section -->
