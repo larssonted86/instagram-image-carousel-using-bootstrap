@@ -75,7 +75,7 @@ export default {
         return{
             data: [],
             total_amount: localStorage.total_amount ?? 12,
-            number_per_slide: localStorage.number_per_slide ??  8,
+            number_per_slide: localStorage.number_per_slide ??  6,
             set_of_images:[],
             token: process.env.VUE_APP_INSTAGRAM_TOKEN,
             force_update: 0,
