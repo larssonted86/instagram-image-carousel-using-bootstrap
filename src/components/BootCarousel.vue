@@ -1,8 +1,7 @@
 <template>
-<div class="container">
-  <div class="row mb-2 p-1">
-    <!-- Total images selection section -->
-    <div class="col d-flex  justify-content-end">
+<div class="container"> 
+  <div class="row mb-2 p-1"><!--selection section -->
+    <div class="col d-flex  justify-content-end"> <!-- Total images selection section -->
         <label for="total_amount" class="text-white">totalt antal bilder</label>
         <select @change="image_amount = ChangeTotalAmount()" name="total_amount" id="total_amount" v-model="total_amount" > 
             <option value="12">12</option>                    
@@ -11,8 +10,8 @@
             <option value="96">96</option>
             <option :value="data.length">alla</option> 
         </select>
-    </div>
-    <div class="col d-flex  justify-content-end">
+    </div><!-- End of Total images selection section -->
+    <div class="col d-flex  justify-content-end"> <!-- Number of images per slide selection section -->
         <label for="total_amount" class="text-white">antal bilder per slide</label>
         <select @change="image_amount = ChangeNumberPerSlide()" name="total_amount" id="number_per_slide" v-model="number_per_slide" > 
             <option value="4">4</option>                    
@@ -21,17 +20,17 @@
             <option value="12">12</option>
             <option :value="data.length">alla</option> 
         </select>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col" :key="force_update">
+    </div><!-- End of Images per slide selection section -->
+  </div><!-- End of selection section -->
+  <div class="row"><!-- Carousel section -->
+    <div class="col" :key="force_update"> <!-- forcing update of site when you select a lesser amount of images than what is set -->
       <div id="carouselExampleIndicators" class="carousel slide carousel-container m-3" data-bs-ride="carousel" data-bs-interval="false">
         <div class="carousel-indicators">
           <button v-for="(set,index) in set_of_images" :key="index"  type="button" data-bs-target="#carouselExampleIndicators" :data-bs-slide-to="index" :class="`${ index === 0 ? 'active' : '' }`" aria-current="true" :aria-label="'Side '+index"></button>
         </div>
         <div class="carousel-inner">
-          <div v-for="(set,index) in set_of_images" :key="index" :class="`carousel-item ${ index === 0 ? 'active' : '' }`">
-            <div class="slide-container">
+          <div v-for="(set,index) in set_of_images" :key="index" :class="`carousel-item ${ index === 0 ? 'active' : '' }`"> <!-- sets amount of slides depending on set of images -->
+            <div class="slide-container">  <!-- adds a bootstrap container/row/columns to the slide, this is the way to be able to display more than one image per slide -->
               <div class="row slider-row">
                 <div 
                   v-for="image in set" 
@@ -40,9 +39,9 @@
                   @mouseenter="image.showCaption = true"
                   @mouseleave="image.showCaption = false"
                   >
-                    <a  :href="image.permalink" class="caption-link position-relative align-self-end">
-                      <img :src="image.thumbnail_url ? image.thumbnail_url : image.media_url" alt="" class="image-col">
-                          <div v-show="image.showCaption" class="bg-dark caption-container position-absolute bottom-0 ">
+                    <a  :href="image.permalink" class="caption-link position-relative align-self-end"> <!-- wraps the image in a link so that you can click anywhere on the image -->
+                      <img :src="image.thumbnail_url ? image.thumbnail_url : image.media_url" alt="" class="image-col"><!-- checks if there is a video thumbnail or image url -->
+                          <div v-show="image.showCaption" class="bg-dark caption-container position-absolute bottom-0 "> <!-- caption div that is hidden by default and active on hover -->
                               {{image.caption}}
                           </div>
                     </a>
@@ -51,17 +50,18 @@
             </div>
           </div>
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev"> <!-- start of prev chevron button -->
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
+          <span class="visually-hidden">Previous</span> <!-- end of prev chevron button -->
         </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next"><!-- start of next cheron button -->
           <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
+          <span class="visually-hidden">Next</span><!-- end of next chevron button -->
         </button>
       </div>
     </div>
-  </div>
+  </div> 
+    <!-- End of carousel section -->
 </div>
    
   
@@ -102,6 +102,7 @@ export default {
                     } );
         },
 
+        //splits the data aray into chunks to be able to map them into the sets of displays
         chunkArray(array, size) {
             if(array.length <= size){
             return [array]
@@ -117,6 +118,7 @@ export default {
           this.get_data();
         },
 
+        //changes the number of images per slide in the carousel
         ChangeNumberPerSlide(){
 
           localStorage.number_per_slide = this.number_per_slide;
@@ -124,6 +126,7 @@ export default {
           this.get_data();
         },
     },
+    
     mounted(){
        this.get_data();
     },
