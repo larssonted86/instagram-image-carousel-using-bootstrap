@@ -4,11 +4,21 @@
     <!-- Total images selection section -->
     <div class="col d-flex  justify-content-end">
         <label for="total_amount" class="text-white">totalt antal bilder</label>
-        <select @change="image_amount = ChangeAmount()" name="total_amount" id="total_amoutn" v-model="total_amount" > 
+        <select @change="image_amount = ChangeTotalAmount()" name="total_amount" id="total_amount" v-model="total_amount" > 
             <option value="12">12</option>                    
             <option value="24">24</option> 
             <option value=48>48</option> 
             <option value="96">96</option>
+            <option :value="data.length">alla</option> 
+        </select>
+    </div>
+    <div class="col d-flex  justify-content-end">
+        <label for="total_amount" class="text-white">antal bilder per slide</label>
+        <select @change="image_amount = ChangeNumberPerSlide()" name="total_amount" id="number_per_slide" v-model="number_per_slide" > 
+            <option value="4">4</option>                    
+            <option value="6">6</option> 
+            <option value=8>8</option> 
+            <option value="12">12</option>
             <option :value="data.length">alla</option> 
         </select>
     </div>
@@ -26,18 +36,15 @@
                 <div 
                   v-for="image in set" 
                   :key="image.id" 
-                  class="col-6  col-md-4 col-lg-3 image-col position-relative mb-2 d-flex justify-content-center"  
+                  class="col-6  col-md-4 col-lg-3 mb-2 d-flex"  
                   @mouseenter="image.showCaption = true"
                   @mouseleave="image.showCaption = false"
-                  :style="{ 
-                    backgroundImage: image.thumbnail_url ? `url('${image.thumbnail_url}')`:  `url('${image.media_url}')`,
-                  }" >
-                    <a  :href="image.permalink" class="caption-link">
-                      
-                          <div v-show="image.showCaption" class="position-absolute bottom-0 bg-dark caption-container">
+                  >
+                    <a  :href="image.permalink" class="caption-link position-relative align-self-end">
+                      <img :src="image.thumbnail_url ? image.thumbnail_url : image.media_url" alt="" class="image-col">
+                          <div v-show="image.showCaption" class="bg-dark caption-container position-absolute bottom-0 ">
                               {{image.caption}}
-                          </div>                        
-                     
+                          </div>
                     </a>
                 </div>
               </div>
@@ -69,7 +76,7 @@ export default {
         return{
             data: [],
             total_amount: localStorage.total_amount ?? 12,
-            number_per_slide: localStorage.number_per_slide ??  6,
+            number_per_slide: localStorage.number_per_slide ??  8,
             set_of_images:[],
             token: process.env.VUE_APP_INSTAGRAM_TOKEN,
             force_update: 0,
@@ -103,12 +110,19 @@ export default {
         },
 
         //changes the amount of total pictures in the carousel
-        ChangeAmount(){
+        ChangeTotalAmount(){
 
           localStorage.total_amount = this.total_amount;
 
           this.get_data();
-    },
+        },
+
+        ChangeNumberPerSlide(){
+
+          localStorage.number_per_slide = this.number_per_slide;
+
+          this.get_data();
+        },
     },
     mounted(){
        this.get_data();
@@ -118,29 +132,15 @@ export default {
 
 <style lang="scss" scoped>
 
-
-.carousel-container{
-  height: 300px
-}
-
-.carousel-inner{
-    height:100%;
-}
-.carousel-item{
-  height:100%;
-}
-.slide-container{
-  height: 100%;
-}
-.slider-row{
-  height:100%;
-}
 .image-col{
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
+  width: 100%;
+  height: 100%;
 }
 .caption-container{
+ 
     width:100%;
     padding: 5px;
     height: 30px;
@@ -149,6 +149,7 @@ export default {
     text-overflow: ellipsis;
 }
 .caption-link{
+  
     color: white;
     text-decoration: none;
     font-size: 12px;
