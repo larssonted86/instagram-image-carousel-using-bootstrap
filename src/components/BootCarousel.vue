@@ -50,11 +50,11 @@
             </div>
           </div>
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev"> <!-- start of prev chevron button -->
+        <button id="carousel-control-prev"  class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev"> <!-- start of prev chevron button -->
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
           <span class="visually-hidden">Previous</span> <!-- end of prev chevron button -->
         </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next"><!-- start of next cheron button -->
+        <button id="carousel-control-next" class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next"><!-- start of next cheron button -->
           <span class="carousel-control-next-icon" aria-hidden="true"></span>
           <span class="visually-hidden">Next</span><!-- end of next chevron button -->
         </button>
@@ -159,5 +159,14 @@ export default {
     &:hover{
         color: white;
     }
+}
+#carousel-control-next {
+    right: -10% !important;
+}
+#carousel-control-prev {
+    left: -10% !important;
+}
+.carousel-indicators{
+  bottom: -6%;
 }
 </style>
