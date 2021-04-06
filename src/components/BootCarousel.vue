@@ -24,7 +24,7 @@
   </div><!-- End of selection section -->
   <div class="row"><!-- Carousel section -->
     <div class="col" :key="force_update"> <!-- forcing update of site when you select a lesser amount of images than what is set -->
-      <div id="carouselExampleIndicators" class="carousel slide carousel-container m-3" data-bs-ride="carousel" data-bs-interval="false">
+      <div id="carouselExampleIndicators" class="carousel slide carousel-container m-3" data-bs-ride="carousel" data-bs-interval="false" data-bs-touch="true">
         <div class="carousel-indicators">
           <button v-for="(set,index) in set_of_images" :key="index"  type="button" data-bs-target="#carouselExampleIndicators" :data-bs-slide-to="index" :class="`${ index === 0 ? 'active' : '' }`" aria-current="true" :aria-label="'Side '+index"></button>
         </div>
@@ -126,7 +126,7 @@ export default {
           this.get_data();
         },
     },
-    
+
     mounted(){
        this.get_data();
     },
