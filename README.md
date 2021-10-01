@@ -1,24 +1,4 @@
-# caupo-testv2
+A widget that displays images collected from an instagram account. 
+Using a token the images are collected then displayed in a carousel, the user can select the amount of images shown. 
+Each image has a hover effect that displays the image caption.
 
-## Project setup
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
